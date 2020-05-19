@@ -5,19 +5,30 @@ using UnityEngine.UI;
 
 public class SlideController : MonoBehaviour
 {
-    public GameObject[] characterIcons = new GameObject[3];
-    public GameObject[] objectIcons = new GameObject[3];
-    public GameObject sceneIcon;
+    List<GameObject> characterIcons = new List<GameObject>();
+    List<GameObject> objectIcons = new List<GameObject>();
+    GameObject sceneIcon;
     public GameObject scrollbar;
 
     private void Start()
     {
+        // find all character and object icons within the slide and assign them to the appropriate lists
+        AttributeClass[] allDescendedAttributeObjs = gameObject.GetComponentsInChildren<AttributeClass>();
+        foreach (AttributeClass ac in allDescendedAttributeObjs) {
+            if (ac.attributeType == AttributeType.Character)
+                characterIcons.Add(ac.gameObject);
+            else if (ac.attributeType == AttributeType.Object)
+                objectIcons.Add(ac.gameObject);
+        }
+
+        /* OLD — here just for reference
         characterIcons[0] = gameObject.transform.Find("CharacterDisplay1").gameObject;
         characterIcons[1] = gameObject.transform.Find("CharacterDisplay2").gameObject;
         characterIcons[2] = gameObject.transform.Find("CharacterDisplay3").gameObject;
         objectIcons[0] = gameObject.transform.Find("ObjectDisplay1").gameObject;
         objectIcons[1] = gameObject.transform.Find("ObjectDisplay2").gameObject;
-        objectIcons[2] = gameObject.transform.Find("ObjectDisplay3").gameObject;
+        objectIcons[2] = gameObject.transform.Find("ObjectDisplay3").gameObject;*/
+
         sceneIcon = gameObject.transform.Find("SceneDisplay").gameObject;
     }
 
