@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4456893766894035777}
   - component: {fileID: 114450578983214030}
+  - component: {fileID: 114688216334648828}
   m_Layer: 0
   m_Name: SampleModel1
   m_TagString: Untagged
@@ -231,6 +232,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7db0357d03d140d08b11e2c81002f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114688216334648828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326871888680445292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b61df218ffd4f3a906227266f92ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IP: 127.0.0.2
+  portLocal: 6000
+  xMotionDamping: 1
+  yMotionDamping: 1
+  zMotionDamping: 0.2
+  zOffset: 2
+  xRange: {x: -50, y: 50}
+  yRange: {x: 0, y: 75}
+  zRange: {x: 0, y: 30}
+  useRangeNotDamping: 1
+  keyboardInputDepth: 1
+  keyboardInputYRot: 1
+  useShiftInput: 0
+  mapToPhoneRotation: 0
+  turnAroundY: 0
+  usingYolo: 0
+  flipX: 1
+  flipY: 1
+  translatePos: {x: 0, y: 0}
+  stringX: 
+  stringY: 
+  stringZ: 
+  stringYaw: 
+  stringP: 
+  stringR: 
+  valueX: 0
+  valueY: 0
+  valueZ: 0
+  valueYaw: 0
+  valueP: 0
+  valueR: 0
 --- !u!1 &5776621682627001345
 GameObject:
   m_ObjectHideFlags: 0
