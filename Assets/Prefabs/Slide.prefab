@@ -1633,7 +1633,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2850629052329670061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00034332275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2269672450005768760}
@@ -1647,9 +1647,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000025749207, y: -45.49998}
+  m_AnchoredPosition: {x: -0.00002002716, y: 0.6902628}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5952633305248755280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1988,7 +1988,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5177713760915348616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00074386597}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2269672449510195458}
@@ -2005,9 +2005,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0.0000019073486}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 0.6902647}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5017006421409242725
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2489,7 +2489,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7890611946785693084}
   m_HandleRect: {fileID: 7242604083739140286}
   m_Direction: 2
-  m_Value: 0.17661595
+  m_Value: 0.99052745
   m_Size: 0.39275
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3010,8 +3010,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4109550517105255330}
   m_HandleRect: {fileID: 4255353186118695334}
   m_Direction: 2
-  m_Value: 0.99999994
-  m_Size: 0.5179122
+  m_Value: 0.9842657
+  m_Size: 0.51791215
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
