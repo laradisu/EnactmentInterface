@@ -1,25 +1,19 @@
 ﻿<Properties StartupConfiguration="{52724EEA-BDF3-1276-1F4D-E665ABDB10C6}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SlideController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SlideAdder.cs">
     <Files>
-      <File FileName="Assets/Scripts/Switch.cs" Line="45" Column="23" />
+      <File FileName="Assets/Scripts/Switch.cs" Line="104" Column="53" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackerRotScript.cs" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackIRObj.cs" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackerScript.cs" />
       <File FileName="Assets/Scripts/ModeController.cs" />
       <File FileName="Assets/Scripts/InstructionController.cs" />
       <File FileName="Assets/Scripts/SlideController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SlideAdder.cs" Line="9" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="EnactmentInterface" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="TrackingScripts" expanded="True" />
-                <Node name="SlideController.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="EnactmentInterface" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>

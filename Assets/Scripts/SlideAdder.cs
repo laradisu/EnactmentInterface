@@ -8,7 +8,7 @@ public class SlideAdder : MonoBehaviour
     public GameObject currentCanvas;
     
     public void AddSlide() {
-        GameObject slideInstance = Instantiate(slidePrefab, transform.position, Quaternion.identity, currentCanvas.transform);
+        GameObject slideInstance = Instantiate(slidePrefab, transform.position, GameObject.Find("Canvas").transform.rotation, currentCanvas.transform);
         slideInstance.transform.SetParent(transform);
     }
 }

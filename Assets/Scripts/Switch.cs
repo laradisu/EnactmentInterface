@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Switch : MonoBehaviour {
     public GameObject planningObj;
@@ -11,6 +12,7 @@ public class Switch : MonoBehaviour {
     public GameObject enactmentObj;
     public GameObject startScreenObj;
     public GameObject sceneNumText;
+    public GameObject backgroundPlane;
     int index = 0;
 
     GameObject gameController;
@@ -49,9 +51,10 @@ public class Switch : MonoBehaviour {
 
             List<AttributeClass> allAttributes = currentSlide.GetComponentsInChildren<AttributeClass>().ToList();
             foreach (AttributeClass ac in allAttributes) {
-                if (ac.model == null)
-                    continue;
-                Instantiate(ac.model, GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+                if (ac.model != null)
+                    Instantiate(ac.model, GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+                if (ac.background != null)
+                    backgroundPlane.GetComponent<Image>().sprite = ac.background;
             }
         }
 
@@ -101,7 +104,7 @@ public class Switch : MonoBehaviour {
     }
 
     Vector3 GetRandomPositionNearZero() {
-        return new Vector3(Random.Range(0, 10f) - 5f, Random.Range(0, 10f) - 5f, 0);
+        return new Vector3(Random.Range(0, 15f) - 7.5f, Random.Range(0, 15f) + 2f, 0);
     }
 
     void SetSceneNumText(int num) {
