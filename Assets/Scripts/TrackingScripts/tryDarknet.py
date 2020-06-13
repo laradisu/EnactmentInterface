@@ -7,9 +7,7 @@ import struct
 import shlex
 import sys
 
-#os.chdir('C:\\Users\\u2012\\Downloads\\NJRPROJECTBACKUP\\darknet-master\\build\\darknet\\x64')
 os.chdir('/home/elx-lab/darknet/build/darknet/x64')
-#process = subprocess.Popen(['./../../../darknet','detector','demo','data/objFourCombo.data','yolo-obj-fourCombo.cfg','backupFourCombo/yolo-obj-fourCombo_8000.weights','-c','0','-ext_output'], stdout=subprocess.PIPE, creationflags=subprocess.CREATE_NEW_CONSOLE)
 process = subprocess.Popen(shlex.split('./../../../darknet detector demo data/objFourCombo.data yolo-obj-fourCombo.cfg backupFourCombo/yolo-obj-fourCombo_8000.weights -c 0 -ext_output'), stdout=subprocess.PIPE)
 
 # sample terminal output
@@ -21,156 +19,104 @@ process = subprocess.Popen(shlex.split('./../../../darknet detector demo data/ob
 # FPS:23.8
 
 ip_address = "127.0.0.1"
-ip_addressR = "127.0.0.2"
-port = 9000
-portR = 6000
-shouldSend = False
+udpPorts = [6000, 6001, 6002, 6003]
 namesTracking = ['neutral', 'boy_aa', 'girl_w', 'cat']
 priorConfidences = [-1, -1, -1, -1]
-bestX = -1
-bestXR = -1
-bestY = -1
-bestYR = -1
-bestWidth = -1
-bestWidthR = -1
-bestHeight = -1
-bestHeightR = -1
+bestXs = [-1, -1, -1, -1]
+bestYs = [-1, -1, -1, -1]
+bestWidths = [-1, -1, -1, -1]
+bestHeights = [-1, -1, -1, -1]
+shouldSend = False
 
 while True:
     toutput = process.stdout.readline()
+    if toutput is None:
+        continue
     output = str(toutput)
     print(output)
 
     objectText = re.search('Objects:', output)
     if objectText is not None:
         shouldSend = True
-
-    labelText = re.search(f'{namesTracking}:', output)
-    labelTextR = re.search(f'{namesTrackingR}:', output)
-    
-    
-    allNone = true
-    for name in namesTracking:
-        if (name is not None):
-            allNone = false
-            break
-    if allNone == true
         continue
 
-    confidence = re.search(f'{namesTracking}:[ ]+\d+[%]+', output)
-    confidenceR = re.search(f'{namesTrackingR}:[ ]+\d+[%]+', output)
-    
-    if confidence is not None:
-        confidence = re.search('\d+', confidence[0])
+    confidences = [-1, -1, -1, -1]
+    for index, name in enumerate(namesTracking):
+        confidences[index] = re.search(f'{name}:[ ]+\d+[%]+', output)
 
-        if int(confidence[0]) < priorConfidence:
-            pass
+    allNone = True
+    for name in namesTracking:
+        if name is not None:
+            allNone = False
+            break
+    if allNone:
+        continue
+
+    for index, confidence in enumerate(confidences):
+        if confidence is not None:  # it found the confidence, so the whole line (with x,y,name,etc) exists
+            confidence = re.search('\d+', confidence[0])
+
+            if int(confidence[0]) >= priorConfidences[index]:
+                priorConfidences[index] = int(confidence[0])
+
+                x = re.search('left_x:[ ]+\d+', output)
+                if x is not None:
+                    x = re.search('\d+', x[0])
+                    bestXs[index] = float(x[0])
+                    #print('x is ' + x[0])
+
+                y = re.search('top_y:[ ]+\d+', output)
+                if y is not None:
+                    y = re.search('\d+', y[0])
+                    bestYs[index] = float(y[0])
+                    #print('y is ' + y[0])
+
+                width = re.search('width:[ ]+\d+', output)
+                if width is not None:
+                    width = re.search('\d+', width[0])
+                    bestWidths[index] = float(width[0])
+                    #print('width is ' + width[0])
+
+                height = re.search('height:[ ]+\d+', output)
+                if height is not None:
+                    height = re.search('\d+', height[0])
+                    bestHeights[index] = float(height[0])
+                    #print('height is ' + height[0])
+
+    if shouldSend:
+        atLeastOne = False
+        for index, priorConfidence in enumerate(priorConfidences):
+            if priorConfidence >= 0:
+                byteData = struct.pack("<dddd", bestXs[index], bestYs[index], bestWidths[index], bestHeights[index])
+                sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                sock.sendto(byteData, (ip_address, udpPorts[index]))
+                bestXs[index] = str(bestXs[index])
+                bestYs[index] = str(bestYs[index])
+                bestWidths[index] = str(bestWidths[index])
+                bestHeights[index] = str(bestHeights[index])
+                print(
+                    f'Best: confidence={priorConfidence}, x={bestXs[index]}, y={bestYs[index]}, width={bestWidths[index]}, height={bestHeights[index]}')
+
+                bestXs[index] = -1
+                bestYs[index] = -1
+                bestWidths[index] = -1
+                bestHeights[index] = -1
+                priorConfidence = -1
+                atLeastOne = True
+
+        if atLeastOne:
+            shouldSend = False
         else:
-            priorConfidence = int(confidence[0])
-            
-            x = re.search('left_x:[ ]+\d+', output)
-            if x is not None:
-                x = re.search('\d+', x[0])
-                bestX = float(x[0])
-                #print('x is ' + x[0])
-    
-            y = re.search('top_y:[ ]+\d+', output)
-            if y is not None:
-                y = re.search('\d+', y[0])
-                bestY = float(y[0])
-                #print('y is ' + y[0])
-    
-            width = re.search('width:[ ]+\d+', output)
-            if width is not None:
-                width = re.search('\d+', width[0])
-                bestWidth = float(width[0])
-                #print('width is ' + width[0])
-    
-            height = re.search('height:[ ]+\d+', output)
-            if height is not None:
-                height = re.search('\d+', height[0])
-                bestHeight = float(height[0])
-                #print('height is ' + height[0])
-    
-    if confidenceR is not None:
-        confidenceR = re.search('\d+', confidenceR[0])
-        
-        if int(confidenceR[0]) < priorConfidenceR:
-            pass
-        else:
-            priorConfidenceR = int(confidenceR[0])
-    
-            xR = re.search('left_x:[ ]+\d+', output)
-            if xR is not None:
-                xR = re.search('\d+', xR[0])
-                bestXR = float(xR[0])
-                #print('x is ' + x[0])
-            
-            yR = re.search('top_y:[ ]+\d+', output)
-            if yR is not None:
-                yR = re.search('\d+', yR[0])
-                bestYR = float(yR[0])
-                #print('y is ' + y[0])
-            
-            widthR = re.search('width:[ ]+\d+', output)
-            if widthR is not None:
-                widthR = re.search('\d+', widthR[0])
-                bestWidthR = float(widthR[0])
-                #print('width is ' + width[0])
-            
-            heightR = re.search('height:[ ]+\d+', output)
-            if heightR is not None:
-                heightR = re.search('\d+', heightR[0])
-                bestHeightR = float(heightR[0])
-                #print('height is ' + height[0])
+            doNotReset = False
+            for priorConfidence in priorConfidences:
+                if priorConfidence > 0:
+                    doNotReset = True
 
-    if (shouldSend and ((priorConfidence >= 0) or (priorConfidenceR >= 0))):
-        #data = '' + int(x[0]) + ',' + y[0] + ',' + width[0] + ',' + height[0]
-        if (priorConfidence >= 0):
-            byteData = struct.pack("<dddd", bestX, bestY, bestWidth, bestHeight)
-            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            sock.sendto(byteData, (ip_address, port))
-            bestX = str(bestX)
-            bestY = str(bestY)
-            bestWidth = str(bestWidth)
-            bestHeight= str(bestHeight)
-            print(f'Best: confidence={priorConfidence}, x={bestX}, y={bestY}, width={bestWidth}, height={bestHeight}')
+            if not doNotReset:
+                bestXs = [-1, -1, -1, -1]
+                bestYs = [-1, -1, -1, -1]
+                bestWidths = [-1, -1, -1, -1]
+                bestHeights = [-1, -1, -1, -1]
+                priorConfidences = [-1, -1, -1, -1]
 
-            bestX = -1
-            bestY = -1
-            bestWidth = -1
-            bestHeight = -1
-            priorConfidence = -1
-        if (priorConfidenceR >= 0):
-            byteDataR = struct.pack("<dddd", bestXR, bestYR, bestWidthR, bestHeightR)
-            sockR = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            sockR.sendto(byteDataR, (ip_addressR, portR))
-            bestXR = str(bestXR)
-            bestYR = str(bestYR)
-            bestWidthR = str(bestWidthR)
-            bestHeightR= str(bestHeightR)
-            print(f'BestR: confidenceR={priorConfidenceR}, xR={bestXR}, yR={bestYR}, widthR={bestWidthR}, heightR={bestHeightR}')
-
-            bestXR = -1
-            bestYR = -1
-            bestWidthR = -1
-            bestHeightR = -1
-            priorConfidenceR = -1
-        
-        shouldSend = False
-
-    elif (shouldSend and ((priorConfidence < 0) and (priorConfidenceR < 0))):
-        bestX = -1
-        bestY = -1
-        bestWidth = -1
-        bestHeight = -1
-        priorConfidence = -1
-        
-        bestXR = -1
-        bestYR = -1
-        bestWidthR = -1
-        bestHeightR = -1
-        priorConfidenceR = -1
-        
-        shouldSend = False
-
+                shouldSend = False
