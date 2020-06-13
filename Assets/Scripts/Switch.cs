@@ -65,6 +65,7 @@ public class Switch : MonoBehaviour {
         startScreenObj.SetActive(false);
     }
     public void SwitchToEnactmentPhaseNext(bool backwards) {
+        Debug.Log("PRESSED " + Time.time);
         int totalSlideCount = timelineObj.transform.childCount;
 
         if (!backwards && index < totalSlideCount - 1)
@@ -88,9 +89,10 @@ public class Switch : MonoBehaviour {
         List<AttributeClass> allAttributes = currentSlide.GetComponentsInChildren<AttributeClass>().ToList();
 
         foreach (AttributeClass ac in allAttributes) {
-            if (ac.model == null)
-                continue;
-            Instantiate(ac.model, GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+            if (ac.model != null)
+                Instantiate(ac.model, GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+            if (ac.background != null)
+                backgroundPlane.GetComponent<Image>().sprite = ac.background;
         }
 
         SetSceneNumText(index + 1);

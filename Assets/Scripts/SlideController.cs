@@ -72,6 +72,6 @@ public class SlideController : MonoBehaviour
         sceneIcon.GetComponent<Image>().sprite = ac.icon;
         ciac.icon = ac.icon;
         ciac.model = ac.model;
-        ciac.background = ac.background; 
+        ciac.background = ac.background;
     }
 }
