@@ -73,18 +73,9 @@ public class TrackerScript : MonoBehaviour
     public double valueR = 0;
 
 
-    // public string lastReceivedUDPPacket = "";
-    // public string allReceivedUDPPackets = "";
-    // clear this from time to time!
-
     // start from Unity3d
     void Start()
     {
-        // Create remote endpoint (to Matlab) 
-        // remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), portRemote);
-
-        // Create local client
-        //  client = new UdpClient(portLocal);
         init();
         Application.targetFrameRate = 30;
     }
@@ -94,44 +85,8 @@ public class TrackerScript : MonoBehaviour
     {
         var pos = this.transform.position;
         Quaternion rot = this.transform.rotation;
-        //pos.x = valueX;
-        //this.transform.position = pos;
 
-
-        //var pos = this.transform.position;
-        //var rot = this.transform.rotation;
-
-        //IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
-        //byte[] data = client.Receive(ref anyIP);
-
-        //int byteLength = Buffer.ByteLength(data);
-
-        //need to change to float/double
-        //float first
-        //float valueX = BitConverter.ToSingle(data, 0);
-        //stringX = valueX.ToString();
-        //float valueY = BitConverter.ToSingle(data, 4);
-        //stringY = valueY.ToString();
-        //float valueZ = BitConverter.ToSingle(data, 8);
-        //stringZ = valueZ.ToString();
-        //float valueR = BitConverter.ToSingle(data, 12);
-        //stringR = valueR.ToString();
-        //float valueP = BitConverter.ToSingle(data, 16);
-        //stringP = valueP.ToString();
-        //float valueYaw = BitConverter.ToSingle(data, 20);
-        //stringYaw = valueYaw.ToString();
-
-
-        //  string lengthByte = byteLength.ToString();
-
-        //print(">> " + text);
-        //lastReceivedUDPPacket = lengthByte;//text;
-        //allReceivedUDPPackets = allReceivedUDPPackets + text;
-
-        //add (float) for strict data transform
-        pos.x = (float)valueX * xMotionDamping;
-        pos.y = (float)valueY * yMotionDamping;
-
+        
         if (keyboardInputDepth)
         {
             if (useShiftInput == Input.GetKey(KeyCode.LeftShift))
@@ -153,10 +108,17 @@ public class TrackerScript : MonoBehaviour
             pos.x = xRatio * xGameRange.y;
             pos.y = yRatio * yGameRange.y;
         }
+	else {
+	    pos.x = (float)valueX * xMotionDamping;
+            pos.y = (float)valueY * yMotionDamping;
 
+	}
+
+	/*
         rot.x = (float) valueYaw;
         rot.y = (float) valueP;
         rot.z = (float) valueR;
+	*/
 
         if (mapToPhoneRotation)
         {
@@ -205,42 +167,6 @@ public class TrackerScript : MonoBehaviour
         if (!usingYolo)
             this.transform.rotation = Quaternion.Euler((float)valueYaw, (float)valueP, (float)valueR);
     }
-
-    /*
-    void OnDestroy()
-    {
-        client.Close();
-    }
-    */
-
-
-
-
-    // OnGUI
-    /*
-    void OnGUI()
-    {
-        Rect rectObj = new Rect(40, 10, 200, 400);
-        GUIStyle style = new GUIStyle();
-        style.alignment = TextAnchor.UpperLeft;
-        GUI.Box(rectObj, "# UDP Object Receive\n127.0.0.1:" + portLocal + "\n"
-        + "\n X = " + stringX //"\nLast Packet: \n" + //lastReceivedUDPPacket
-        + "\n Y = " + stringY
-        + "\n Z = " + stringZ
-        + "\n R = " + stringR
-        + "\n P = " + stringP
-        + "\n Yaw = " + stringYaw//  + "\n\nAll Messages: \n" + allReceivedUDPPackets
-            , style);
-
-        strMessageSend = GUI.TextField(new Rect(40, 420, 140, 20), strMessageSend);
-        if (GUI.Button(new Rect(190, 420, 40, 20), "send"))
-        {
-            sendData(strMessageSend + "\n");
-        }
-
-    }
-
-    */
 
     // Initialization code
     private void init()
@@ -307,31 +233,6 @@ public class TrackerScript : MonoBehaviour
                     valueZ = 500/(BitConverter.ToDouble(data, 16));
                     stringZ = valueZ.ToString();
                 }
-
-
-
-                //int byteLength = Buffer.ByteLength(data);
-
-                //float valueX = BitConverter.ToSingle(data, 0);
-                //stringX = valueX.ToString();
-                //float valueY = BitConverter.ToSingle(data, 4);
-                //stringY = valueY.ToString();
-                //float valueZ = BitConverter.ToSingle(data, 8);
-                //stringZ = valueZ.ToString();
-                //float valueR = BitConverter.ToSingle(data, 12);
-                //stringR = valueR.ToString();
-                //float valueP = BitConverter.ToSingle(data, 16);
-                //stringP = valueP.ToString();
-                //float valueYaw = BitConverter.ToSingle(data, 20);
-                //stringYaw = valueYaw.ToString();
-
-                //string lengthByte = byteLength.ToString();
-
-                //print(">> " + text);
-                //lastReceivedUDPPacket = lengthByte;//text;
-                //allReceivedUDPPackets = allReceivedUDPPackets + text;
-
-                //pos.x = stringX.toFloat;
             }
             catch (Exception err)
             {
@@ -339,34 +240,6 @@ public class TrackerScript : MonoBehaviour
             }
         }
     }
-
-
-    /*
-    // Send data
-    private void sendData(string message)
-    {
-        try
-        {
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            client.Send(data, data.Length, remoteEndPoint);
-
-        }
-        catch (Exception err)
-        {
-            print(err.ToString());
-        }
-    }
-    */
-
-
-    /*
-    // getLatestUDPPacket, clears all previous packets
-    public string getLatestUDPPacket()
-    {
-        allReceivedUDPPackets = "";
-        return lastReceivedUDPPacket;
-    }
-    */
 
     //Prevent crashes - close clients and threads properly!
     void OnDisable()

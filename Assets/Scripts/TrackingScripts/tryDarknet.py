@@ -4,9 +4,13 @@ import re
 import socket
 import json
 import struct
+import shlex
+import sys
 
-os.chdir('C:\\Users\\u2012\\Downloads\\NJRPROJECTBACKUP\\darknet-master\\build\\darknet\\x64')
-process = subprocess.Popen(['darknet.exe','detector','demo','data/obj.data','yolo-obj.cfg','yolo-obj.weights','-c','1','-ext_output'], stdout=subprocess.PIPE)
+#os.chdir('C:\\Users\\u2012\\Downloads\\NJRPROJECTBACKUP\\darknet-master\\build\\darknet\\x64')
+os.chdir('/home/elx-lab/darknet/build/darknet/x64')
+#process = subprocess.Popen(['./../../../darknet','detector','demo','data/objFourCombo.data','yolo-obj-fourCombo.cfg','backupFourCombo/yolo-obj-fourCombo_8000.weights','-c','0','-ext_output'], stdout=subprocess.PIPE, creationflags=subprocess.CREATE_NEW_CONSOLE)
+process = subprocess.Popen(shlex.split('./../../../darknet detector demo data/objFourCombo.data yolo-obj-fourCombo.cfg backupFourCombo/yolo-obj-fourCombo_8000.weights -c 0 -ext_output'), stdout=subprocess.PIPE)
 
 # sample terminal output
 # Objects:
@@ -21,8 +25,8 @@ ip_addressR = "127.0.0.2"
 port = 9000
 portR = 6000
 shouldSend = False
-namesTracking = 'puppet'
-namesTrackingR = 'object'
+namesTracking = 'neutral'
+namesTrackingR = 'boy_aa'
 priorConfidence = -1
 priorConfidenceR = -1
 bestX = -1
@@ -35,7 +39,9 @@ bestHeight = -1
 bestHeightR = -1
 
 while True:
-    output = str(process.stdout.readline().decode('utf-8'))
+    toutput = process.stdout.readline()
+    output = str(toutput)
+    print(output)
 
     objectText = re.search('Objects:', output)
     if objectText is not None:
@@ -48,8 +54,8 @@ while True:
     else:
         continue
 
-    confidence = re.search('puppet:[ ]+\d+[%]+', output)
-    confidenceR = re.search('object:[ ]+\d+[%]+', output)
+    confidence = re.search(f'{namesTracking}:[ ]+\d+[%]+', output)
+    confidenceR = re.search(f'{namesTrackingR}:[ ]+\d+[%]+', output)
     
     if confidence is not None:
         confidence = re.search('\d+', confidence[0])
