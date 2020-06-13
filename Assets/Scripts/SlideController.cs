@@ -68,11 +68,18 @@ public class SlideController : MonoBehaviour
     }
     public void AddScene(AttributeClass ac)
     {
-
+        
         AttributeClass ciac = sceneIcon.GetComponent<AttributeClass>();
         sceneIcon.GetComponent<Image>().sprite = ac.icon;
         ciac.icon = ac.icon;
         ciac.model = ac.model;
-       
-    }
+        var planes = Resources.FindObjectsOfTypeAll<plane>();
+        Sprite myImageComponent = planes[0].GetComponent<Image>().sprite;
+        if(ac.background != null)
+            myImageComponent = ac.background; 
+ 
+
+
+
+}
 }
