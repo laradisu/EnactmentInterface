@@ -25,10 +25,8 @@ ip_addressR = "127.0.0.2"
 port = 9000
 portR = 6000
 shouldSend = False
-namesTracking = 'neutral'
-namesTrackingR = 'boy_aa'
-priorConfidence = -1
-priorConfidenceR = -1
+namesTracking = ['neutral', 'boy_aa', 'girl_w', 'cat']
+priorConfidences = [-1, -1, -1, -1]
 bestX = -1
 bestXR = -1
 bestY = -1
@@ -49,9 +47,14 @@ while True:
 
     labelText = re.search(f'{namesTracking}:', output)
     labelTextR = re.search(f'{namesTrackingR}:', output)
-    if (labelText or labelTextR) is not None:
-        pass
-    else:
+    
+    
+    allNone = true
+    for name in namesTracking:
+        if (name is not None):
+            allNone = false
+            break
+    if allNone == true
         continue
 
     confidence = re.search(f'{namesTracking}:[ ]+\d+[%]+', output)
