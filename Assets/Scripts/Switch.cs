@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Switch : MonoBehaviour {
     public GameObject planningObj;
     public GameObject timelineObj;
+    public GameObject instructionObj;
     public GameObject enactmentObj;
     public GameObject startScreenObj;
     public GameObject sceneNumText;
@@ -35,6 +36,7 @@ public class Switch : MonoBehaviour {
             Destroy(t.gameObject);
 
         enactmentObj.SetActive(false);
+        instructionObj.SetActive(true);
         planningObj.SetActive(true);
         startScreenObj.SetActive(false);
     }
