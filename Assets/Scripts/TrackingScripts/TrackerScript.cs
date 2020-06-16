@@ -72,11 +72,21 @@ public class TrackerScript : MonoBehaviour
     public double valueP = 0;
     public double valueR = 0;
 
+    bool shouldChangePos = false;
 
     // start from Unity3d
     void Start()
     {
-        init();
+        valueX = transform.position.x;
+        valueY = transform.position.y;
+        valueZ = transform.position.z;
+
+        if (!GameObject.FindGameObjectWithTag("GameController").GetComponent<ModeController>().IsUsingYOLO()) {
+            this.enabled = false;
+        }
+        else
+            init();
+
         Application.targetFrameRate = 30;
     }
 
@@ -108,11 +118,10 @@ public class TrackerScript : MonoBehaviour
             pos.x = xRatio * xGameRange.y;
             pos.y = yRatio * yGameRange.y;
         }
-	else {
-	    pos.x = (float)valueX * xMotionDamping;
+	    else {
+	        pos.x = (float)valueX * xMotionDamping;
             pos.y = (float)valueY * yMotionDamping;
-
-	}
+	    }
 
 	/*
         rot.x = (float) valueYaw;
@@ -163,7 +172,10 @@ public class TrackerScript : MonoBehaviour
         pos.x += translatePos.x;
         pos.y += translatePos.y;
 
-        this.transform.position = pos;
+        if (shouldChangePos) {
+            this.transform.position = pos;
+            shouldChangePos = false;
+        }
         if (!usingYolo)
             this.transform.rotation = Quaternion.Euler((float)valueYaw, (float)valueP, (float)valueR);
     }
@@ -232,6 +244,8 @@ public class TrackerScript : MonoBehaviour
                     stringY = valueY.ToString();
                     valueZ = 500/(BitConverter.ToDouble(data, 16));
                     stringZ = valueZ.ToString();
+                    shouldChangePos = true;
+                    Debug.Log("Shoudl change pos");
                 }
             }
             catch (Exception err)
@@ -247,7 +261,12 @@ public class TrackerScript : MonoBehaviour
         if (receiveThread1 != null)
             receiveThread1.Abort();
 
-        client.Close();
+        try {
+            client.Close();
+        }
+        catch {
+            Debug.Log("Didn't quit client correctly");
+        }
     }
 
 }

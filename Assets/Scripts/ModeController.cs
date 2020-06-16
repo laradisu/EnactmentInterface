@@ -8,6 +8,7 @@ public enum GameModes {CONTINUOUS, PREPLANNED};
 public class ModeController : MonoBehaviour
 {
     private GameModes currentGameMode;
+    bool useYOLO;
 
     public Button continuousButton;
     public Button preplannedButton;
@@ -35,5 +36,13 @@ public class ModeController : MonoBehaviour
             GetComponent<Switch>().SwitchToPlanningPhase();
         else if (GetCurGameMode() == GameModes.CONTINUOUS)
             GetComponent<Switch>().SwitchToEnactmentPhase();
+    }
+
+    public void SetUsingYOLO(bool usingYOLO) {
+        useYOLO = usingYOLO;
+    }
+
+    public bool IsUsingYOLO() {
+        return useYOLO;
     }
 }

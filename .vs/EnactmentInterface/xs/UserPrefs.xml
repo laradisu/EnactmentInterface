@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{52724EEA-BDF3-1276-1F4D-E665ABDB10C6}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SlideAdder.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Switch.cs">
     <Files>
-      <File FileName="Assets/Scripts/Switch.cs" Line="104" Column="53" />
+      <File FileName="Assets/Scripts/Switch.cs" Line="104" Column="32" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackerRotScript.cs" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackIRObj.cs" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackerScript.cs" />
       <File FileName="Assets/Scripts/ModeController.cs" />
       <File FileName="Assets/Scripts/InstructionController.cs" />
-      <File FileName="Assets/Scripts/SlideController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SlideController.cs" />
       <File FileName="Assets/Scripts/SlideAdder.cs" Line="9" Column="5" />
     </Files>
     <Pads>
@@ -20,7 +20,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="92532498-ac21-410e-8484-9f6d8a2a56e3" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cdbfc112-59c3-4e34-aab2-d7b457f5c4d3" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
