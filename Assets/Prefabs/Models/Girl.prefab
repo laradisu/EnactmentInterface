@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5008684122556647637}
   - component: {fileID: 114007811425509520}
+  - component: {fileID: 114994889783147498}
   m_Layer: 0
   m_Name: Girl
   m_TagString: Untagged
@@ -44,6 +45,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7db0357d03d140d08b11e2c81002f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114994889783147498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074083121463544185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b61df218ffd4f3a906227266f92ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IP: 127.0.0.1
+  portLocal: 6002
+  xMotionDamping: 1
+  yMotionDamping: 1
+  zMotionDamping: 0.2
+  zOffset: 2
+  xRange: {x: -50, y: 123}
+  yRange: {x: 0, y: 75}
+  zRange: {x: 0, y: 30}
+  useRangeNotDamping: 1
+  keyboardInputDepth: 1
+  keyboardInputYRot: 1
+  useShiftInput: 0
+  mapToPhoneRotation: 0
+  turnAroundY: 0
+  usingYolo: 1
+  flipX: 1
+  flipY: 1
+  translatePos: {x: 12, y: 30}
+  stringX: 
+  stringY: 
+  stringZ: 
+  stringYaw: 
+  stringP: 
+  stringR: 
+  valueX: 0
+  valueY: 0
+  valueZ: 0
+  valueYaw: 0
+  valueP: 0
+  valueR: 0
 --- !u!1001 &8339557839628682102
 PrefabInstance:
   m_ObjectHideFlags: 0

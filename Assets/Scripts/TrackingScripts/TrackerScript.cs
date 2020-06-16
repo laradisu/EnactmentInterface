@@ -10,7 +10,7 @@ using System.Threading;
 public class TrackerScript : MonoBehaviour
 {
     //local host
-    public string IP = "127.0.0.2";
+    public string IP = "127.0.0.1";
 
     //Ports
     public int portLocal = 6000;
