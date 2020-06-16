@@ -31,9 +31,7 @@ public class Switch : MonoBehaviour {
 
     public void SwitchToPlanningPhase() // opens the inital popup to character selection
     {
-        List<Tracker> allSpawnedObjs = FindObjectsOfType<Tracker>().ToList();
-        foreach (Tracker t in allSpawnedObjs)
-            Destroy(t.gameObject);
+        DestroySpawnedModels();
 
         enactmentObj.SetActive(false);
         instructionObj.SetActive(true);
@@ -51,6 +49,8 @@ public class Switch : MonoBehaviour {
     }
 
     void OpenEnactmentScene(int newIndex) {
+        DestroySpawnedModels();
+
         sceneIndex = newIndex;
         Transform currentSlide = timelineObj.transform.GetChild(sceneIndex);
         if (currentSlide == null)
@@ -96,6 +96,7 @@ public class Switch : MonoBehaviour {
     }
 
     void BeginContinuousEnactment() {
+        DestroySpawnedModels();
 
         foreach (GameObject go in allTrackableModels) {
             Instantiate(go, Vector3.zero, Quaternion.Euler(-90, 0, 0));
@@ -135,5 +136,11 @@ public class Switch : MonoBehaviour {
 
     void SetSceneNumText(int num) {
         sceneNumText.GetComponent<TextMeshProUGUI>().text = "Scene #" + num;
+    }
+
+    void DestroySpawnedModels() {
+        List<Tracker> allSpawnedObjs = FindObjectsOfType<Tracker>().ToList();
+        foreach (Tracker t in allSpawnedObjs)
+            Destroy(t.gameObject);
     }
 }
