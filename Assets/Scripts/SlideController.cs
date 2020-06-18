@@ -9,9 +9,14 @@ public class SlideController : MonoBehaviour
     List<GameObject> objectIcons = new List<GameObject>();
     GameObject sceneIcon;
     public GameObject scrollbar;
+    Sprite defaultCharacterIcon;
+    Sprite defaultObjectIcon;
 
     private void Start()
     {
+        defaultCharacterIcon = GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().defaultPlayerIcon;
+        defaultObjectIcon = GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().defaultObjectIcon;
+
         // find all character and object icons within the slide and assign them to the appropriate lists
         AttributeClass[] allDescendedAttributeObjs = gameObject.GetComponentsInChildren<AttributeClass>();
         foreach (AttributeClass ac in allDescendedAttributeObjs) {
@@ -38,10 +43,11 @@ public class SlideController : MonoBehaviour
         PopupController pc = gc.GetComponent<PopupController>();
         pc.OpenPopup(CurrentSlide);
     }
+
     public void AddCharacter(AttributeClass ac)
     {
        foreach (GameObject ci in characterIcons)
-        {
+       {
             AttributeClass ciac = ci.GetComponent<AttributeClass>();
             if(ci.GetComponent<AttributeClass>().model == null)
             {
@@ -52,6 +58,20 @@ public class SlideController : MonoBehaviour
             }
        }
     }
+
+    public void RemoveCharacter(AttributeClass ac) {
+        foreach (GameObject ci in characterIcons) {
+            AttributeClass ciac = ci.GetComponent<AttributeClass>();
+            if (ciac.icon == ac.icon && ciac.model == ac.model) {
+                ciac.icon = null;
+                ciac.model = null;
+                ciac.background = null;
+                ci.GetComponent<Image>().sprite = defaultCharacterIcon;
+                break;
+            }
+        }
+    }
+
     public void AddObject(AttributeClass ac)
     {
         foreach (GameObject ci in objectIcons)
@@ -66,6 +86,22 @@ public class SlideController : MonoBehaviour
             }
         }
     }
+
+    public void RemoveObject(AttributeClass ac) {
+        foreach (GameObject ci in objectIcons)
+        {
+            AttributeClass ciac = ci.GetComponent<AttributeClass>();
+            if (ciac.icon == ac.icon && ciac.model == ac.model) {
+                ciac.icon = null;
+                ciac.model = null;
+                ciac.background = null;
+                ci.GetComponent<Image>().sprite = defaultObjectIcon;
+                break;
+            }
+                
+        }
+    }
+
     public void AddScene(AttributeClass ac)
     {
         AttributeClass ciac = sceneIcon.GetComponent<AttributeClass>();

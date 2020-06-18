@@ -20,6 +20,7 @@ public class Switch : MonoBehaviour {
     int sceneIndex = 0;
 
     public Sprite defaultPlayerIcon;
+    public Sprite defaultObjectIcon;
     public List<GameObject> allTrackableModels;
 
     GameObject gameController;
