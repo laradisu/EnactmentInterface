@@ -7,13 +7,16 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class TrackerScript : MonoBehaviour
-{
+public class TrackerScript : MonoBehaviour {
     //local host
     public string IP = "127.0.0.1";
 
     //Ports
     public int portLocal = 6000;
+
+    public bool smoothMovements = true;
+    public bool reduceJitters = true;
+    public float jitterMin = 0.5f;
 
     public float xMotionDamping = 1f;
     public float yMotionDamping = 1f;
@@ -33,6 +36,8 @@ public class TrackerScript : MonoBehaviour
 
     public bool mapToPhoneRotation = false;
     public bool turnAroundY = false;
+
+    public Vector3 targetPosition;
 
     public bool usingYolo = false;
 
@@ -75,11 +80,12 @@ public class TrackerScript : MonoBehaviour
     bool shouldChangePos = false;
 
     // start from Unity3d
-    void Start()
-    {
+    void Start() {
         valueX = transform.position.x;
         valueY = transform.position.y;
         valueZ = transform.position.z;
+
+        targetPosition = transform.position;
 
         if (!GameObject.FindGameObjectWithTag("GameController").GetComponent<ModeController>().IsUsingYOLO()) {
             this.enabled = false;
@@ -91,16 +97,13 @@ public class TrackerScript : MonoBehaviour
     }
 
     //originally no update function at all, all stuff in onGUI()
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         var pos = this.transform.position;
         Quaternion rot = this.transform.rotation;
 
-        
-        if (keyboardInputDepth)
-        {
-            if (useShiftInput == Input.GetKey(KeyCode.LeftShift))
-            { 
+
+        if (keyboardInputDepth) {
+            if (useShiftInput == Input.GetKey(KeyCode.LeftShift)) {
                 if (Input.GetKey(KeyCode.End))
                     zOffset -= 0.2f;
                 if (Input.GetKey(KeyCode.Home))
@@ -108,9 +111,8 @@ public class TrackerScript : MonoBehaviour
             }
         }
 
-        pos.z = zOffset + 0f*(float)valueZ*zMotionDamping;  // Z IS CONSTANT NOW (with keyboard input)
-        if (useRangeNotDamping)
-        {
+        pos.z = zOffset + 0f * (float)valueZ * zMotionDamping;  // Z IS CONSTANT NOW (with keyboard input)
+        if (useRangeNotDamping) {
             float xRatio = (float)valueX / (float)xRange.y;
             float yRatio = (float)valueY / (float)yRange.y;
             float zRatio = (float)valueZ / (float)zRange.y;
@@ -118,34 +120,30 @@ public class TrackerScript : MonoBehaviour
             pos.x = xRatio * xGameRange.y;
             pos.y = yRatio * yGameRange.y;
         }
-	    else {
-	        pos.x = (float)valueX * xMotionDamping;
+        else {
+            pos.x = (float)valueX * xMotionDamping;
             pos.y = (float)valueY * yMotionDamping;
-	    }
+        }
 
-	/*
-        rot.x = (float) valueYaw;
-        rot.y = (float) valueP;
-        rot.z = (float) valueR;
-	*/
+        /*
+            rot.x = (float) valueYaw;
+            rot.y = (float) valueP;
+            rot.z = (float) valueR;
+        */
 
-        if (mapToPhoneRotation)
-        {
+        if (mapToPhoneRotation) {
             valueR = -valueR;
             var tempyaw = valueYaw;
             valueYaw = -valueP;
             valueP = -tempyaw;
         }
 
-        if (turnAroundY)
-        {
+        if (turnAroundY) {
             valueP += 180;
         }
-        
-        if (keyboardInputYRot)
-        {
-            if (useShiftInput == Input.GetKey(KeyCode.LeftShift))
-            {
+
+        if (keyboardInputYRot) {
+            if (useShiftInput == Input.GetKey(KeyCode.LeftShift)) {
                 if (Input.GetKey(KeyCode.LeftArrow))
                     valueP += 6;
                 if (Input.GetKey(KeyCode.RightArrow))
@@ -158,8 +156,7 @@ public class TrackerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.T))
-        {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.T)) {
             valueYaw = 0;
             valueR = 0;
         }
@@ -173,16 +170,26 @@ public class TrackerScript : MonoBehaviour
         pos.y += translatePos.y;
 
         if (shouldChangePos) {
-            this.transform.position = pos;
+            if (reduceJitters)
+                if (Vector3.Magnitude(pos - transform.position) < jitterMin)
+                    pos = transform.position;
+            targetPosition = pos;
             shouldChangePos = false;
         }
         if (!usingYolo)
             this.transform.rotation = Quaternion.Euler((float)valueYaw, (float)valueP, (float)valueR);
+
+        if (Vector3.Magnitude(targetPosition - transform.position) > 0.05f) {
+            if (!smoothMovements)
+                this.transform.position = targetPosition;
+            else {
+                this.transform.position = Vector3.MoveTowards(transform.position, targetPosition, Vector3.Magnitude(targetPosition - transform.position));
+            }
+        }
     }
 
     // Initialization code
-    private void init()
-    {
+    private void init() {
         //Initialize(seen in comments window)
         print("UDP Object init()");
 
@@ -205,21 +212,17 @@ public class TrackerScript : MonoBehaviour
 
 
     // Receive data, update packets received
-    private void ReceiveData()
-    {
-        while (true)
-        {
+    private void ReceiveData() {
+        while (true) {
 
-            try
-            {
+            try {
                 //var pos = this.transform.position;
                 //var rot = this.transform.rotation;
 
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] data = client.Receive(ref anyIP);
 
-                if (!usingYolo)
-                {
+                if (!usingYolo) {
                     //choose one, double here
                     valueX = BitConverter.ToDouble(data, 0);
                     stringX = valueX.ToString();
@@ -236,28 +239,25 @@ public class TrackerScript : MonoBehaviour
                     valueR = BitConverter.ToDouble(data, 40);
                     stringR = valueR.ToString();
                 }
-                else
-                {
+                else {
                     valueX = BitConverter.ToDouble(data, 0);
                     stringX = valueX.ToString();
                     valueY = BitConverter.ToDouble(data, 8);
                     stringY = valueY.ToString();
-                    valueZ = 500/(BitConverter.ToDouble(data, 16));
+                    valueZ = 500 / (BitConverter.ToDouble(data, 16));
                     stringZ = valueZ.ToString();
                     shouldChangePos = true;
                     Debug.Log("Shoudl change pos");
                 }
             }
-            catch (Exception err)
-            {
+            catch (Exception err) {
                 print(err.ToString());
             }
         }
     }
 
     //Prevent crashes - close clients and threads properly!
-    void OnDisable()
-    {
+    void OnDisable() {
         if (receiveThread1 != null)
             receiveThread1.Abort();
 
