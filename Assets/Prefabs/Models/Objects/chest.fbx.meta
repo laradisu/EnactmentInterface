@@ -1,0 +1,281 @@
+fileFormatVersion: 2
+guid: ef08bc1a8e91f6f4abc61ed0bc76b56c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Boite
+    100002: "Charni\xE8re"
+    100004: "Charni\xE8re_1"
+    100006: "Charni\xE8re_1_2"
+    100008: "Charni\xE8re_1_3"
+    100010: "Charni\xE8re_2"
+    100012: "Charni\xE8re_2_2"
+    100014: "Charni\xE8re_2_3"
+    100016: "Charni\xE8re_3"
+    100018: //RootNode
+    100020: Cube
+    100022: Cube_1
+    100024: Cube_3
+    100026: Cylinder
+    100028: Cylinder_1
+    100030: Cylinder_2
+    100032: Cylinder_3
+    100034: Renfort
+    100036: renfort1
+    100038: renfort1_1
+    100040: Renfort2
+    100042: Renfort2_1
+    100044: Renfort_1
+    100046: Renfort_angle
+    100048: Renfort_angle_1
+    100050: Renfort_angle_2
+    100052: Renfort_angle_3
+    100054: Tube
+    100056: Tube_2
+    100058: Tube_2_2
+    100060: Tube_3
+    100062: Tube_4
+    100064: Tube_5
+    400000: Boite
+    400002: "Charni\xE8re"
+    400004: "Charni\xE8re_1"
+    400006: "Charni\xE8re_1_2"
+    400008: "Charni\xE8re_1_3"
+    400010: "Charni\xE8re_2"
+    400012: "Charni\xE8re_2_2"
+    400014: "Charni\xE8re_2_3"
+    400016: "Charni\xE8re_3"
+    400018: //RootNode
+    400020: Cube
+    400022: Cube_1
+    400024: Cube_3
+    400026: Cylinder
+    400028: Cylinder_1
+    400030: Cylinder_2
+    400032: Cylinder_3
+    400034: Renfort
+    400036: renfort1
+    400038: renfort1_1
+    400040: Renfort2
+    400042: Renfort2_1
+    400044: Renfort_1
+    400046: Renfort_angle
+    400048: Renfort_angle_1
+    400050: Renfort_angle_2
+    400052: Renfort_angle_3
+    400054: Tube
+    400056: Tube_2
+    400058: Tube_2_2
+    400060: Tube_3
+    400062: Tube_4
+    400064: Tube_5
+    2100000: No Name
+    2100002: Material.002
+    2100004: Material.001
+    2300000: Boite
+    2300002: "Charni\xE8re"
+    2300004: "Charni\xE8re_1"
+    2300006: "Charni\xE8re_1_2"
+    2300008: "Charni\xE8re_1_3"
+    2300010: "Charni\xE8re_2"
+    2300012: "Charni\xE8re_2_2"
+    2300014: "Charni\xE8re_2_3"
+    2300016: "Charni\xE8re_3"
+    2300018: Cube
+    2300020: Cube_1
+    2300022: Cube_3
+    2300024: Cylinder
+    2300026: Cylinder_1
+    2300028: Cylinder_2
+    2300030: Cylinder_3
+    2300032: Renfort
+    2300034: renfort1
+    2300036: renfort1_1
+    2300038: Renfort2
+    2300040: Renfort2_1
+    2300042: Renfort_1
+    2300044: Renfort_angle
+    2300046: Renfort_angle_1
+    2300048: Renfort_angle_2
+    2300050: Renfort_angle_3
+    2300052: Tube
+    2300054: Tube_2
+    2300056: Tube_2_2
+    2300058: Tube_3
+    2300060: Tube_4
+    2300062: Tube_5
+    3300000: Boite
+    3300002: "Charni\xE8re"
+    3300004: "Charni\xE8re_1"
+    3300006: "Charni\xE8re_1_2"
+    3300008: "Charni\xE8re_1_3"
+    3300010: "Charni\xE8re_2"
+    3300012: "Charni\xE8re_2_2"
+    3300014: "Charni\xE8re_2_3"
+    3300016: "Charni\xE8re_3"
+    3300018: Cube
+    3300020: Cube_1
+    3300022: Cube_3
+    3300024: Cylinder
+    3300026: Cylinder_1
+    3300028: Cylinder_2
+    3300030: Cylinder_3
+    3300032: Renfort
+    3300034: renfort1
+    3300036: renfort1_1
+    3300038: Renfort2
+    3300040: Renfort2_1
+    3300042: Renfort_1
+    3300044: Renfort_angle
+    3300046: Renfort_angle_1
+    3300048: Renfort_angle_2
+    3300050: Renfort_angle_3
+    3300052: Tube
+    3300054: Tube_2
+    3300056: Tube_2_2
+    3300058: Tube_3
+    3300060: Tube_4
+    3300062: Tube_5
+    4300000: Cylinder
+    4300002: "Charni\xE8re_2"
+    4300004: "Charni\xE8re"
+    4300006: Cylinder_2
+    4300008: "Charni\xE8re_2_2"
+    4300010: "Charni\xE8re_2_3"
+    4300012: "Charni\xE8re_1"
+    4300014: "Charni\xE8re_1_2"
+    4300016: Cube_3
+    4300018: Cube_1
+    4300020: Renfort_angle_3
+    4300022: Renfort_angle_2
+    4300024: Renfort_angle_1
+    4300026: Renfort_angle
+    4300028: Renfort2_1
+    4300030: renfort1_1
+    4300032: Renfort_1
+    4300034: Renfort2
+    4300036: renfort1
+    4300038: Renfort
+    4300040: Boite
+    4300042: Cube
+    4300044: Tube_4
+    4300046: Tube_3
+    4300048: Tube_2
+    4300050: Tube
+    4300052: Tube_5
+    4300054: Cylinder_1
+    4300056: Cylinder_3
+    4300058: Tube_2_2
+    4300060: "Charni\xE8re_3"
+    4300062: "Charni\xE8re_1_3"
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 57d02fd04e2f6fe4cb465ce20aacf58f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: c7ceb7247de89dd41a3b10917d87bc00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 81be0c6bae80e2042a25e1d43a4b6caf, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_MetalBare0079_1_S
+    second: {fileID: 2800000, guid: e26bcf1c9ce4a8948a9f9ed6c1b665d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TexturesCom_WoodPlanksOld0282_2_seamless_S
+    second: {fileID: 2800000, guid: 21af6ab018907d44bb02b30c3d5cad6b, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

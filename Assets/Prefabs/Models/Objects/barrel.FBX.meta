@@ -7,12 +7,10 @@ ModelImporter:
     100002: Cylinder035
     100004: Object012
     100006: Object013
-    100008: barrel
     400000: //RootNode
     400002: Cylinder035
     400004: Object012
     400006: Object013
-    400008: barrel
     2100000: 'Material #48'
     2100002: 'Material #153'
     2100004: 'Material #152'
@@ -45,17 +43,17 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: barrel
-    second: {fileID: 2800000, guid: 6ef2a0c13d23f6b4a8ac532c4bd9e6cd, type: 3}
+    second: {fileID: 2800000, guid: 232416b2d73241b498407fc4e55ee309, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: material004
-    second: {fileID: 2800000, guid: 677e8c48518b9e442a67a29934d608b0, type: 3}
+    second: {fileID: 2800000, guid: 67531e768b3a8654fbcbbe46b2387cf2, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: wood_planks_new_0001_02_preview
-    second: {fileID: 2800000, guid: a422825c32fc4dc44ba86abbec9f4666, type: 3}
+    second: {fileID: 2800000, guid: 287906408397f194e98c8f698ee8e2e3, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -86,11 +84,11 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.2
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
@@ -100,13 +98,13 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 1
+    preserveHierarchy: 0
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
