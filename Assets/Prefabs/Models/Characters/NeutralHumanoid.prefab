@@ -59,6 +59,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IP: 127.0.0.1
   portLocal: 6000
+  smoothMovements: 1
+  reduceJitters: 1
+  jitterMin: 0.5
   xMotionDamping: 1
   yMotionDamping: 1
   zMotionDamping: 0.2
@@ -72,6 +75,7 @@ MonoBehaviour:
   useShiftInput: 0
   mapToPhoneRotation: 0
   turnAroundY: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   usingYolo: 1
   flipX: 1
   flipY: 1
