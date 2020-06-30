@@ -16,7 +16,7 @@ public class ModeController : MonoBehaviour
     private void Start() {
 
         // This sets what the buttons do when clicked. That is, the game mode is set, then the game is started.
-
+        currentGameMode = GameModes.PREPLANNED;
         continuousButton.onClick.AddListener(delegate { SetGameMode(GameModes.CONTINUOUS); });
         preplannedButton.onClick.AddListener(delegate { SetGameMode(GameModes.PREPLANNED); });
         continuousButton.onClick.AddListener(delegate { StartGame(); });
