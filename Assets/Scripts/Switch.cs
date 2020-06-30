@@ -17,6 +17,10 @@ public class Switch : MonoBehaviour {
     public GameObject backgroundPlane;
     public GameObject prePlanHelperContent;
     public GameObject prePlanPanel;
+    public GameObject sceneSidebarContent;
+    public GameObject sceneSidebarScrollView;
+    public GameObject sceneSidebarOpenButton;
+    public GameObject sceneSidebarCloseButton;
     int sceneIndex = 0;
 
     public Sprite defaultPlayerIcon;
@@ -62,6 +66,7 @@ public class Switch : MonoBehaviour {
             child.gameObject.GetComponent<Image>().sprite = defaultPlayerIcon;
         }
 
+        // spawn characters and objects, set background, populate PrePlanHelper area
         List<AttributeClass> allAttributes = currentSlide.GetComponentsInChildren<AttributeClass>().ToList();
         foreach (AttributeClass ac in allAttributes) {
             if (ac.model != null)
@@ -84,6 +89,16 @@ public class Switch : MonoBehaviour {
         enactmentObj.SetActive(true);
         prePlanPanel.SetActive(true);
         startScreenObj.SetActive(false);
+
+        // delete existing slides in sidebar
+        foreach (Transform child in sceneSidebarContent.transform) {
+            Destroy(child.gameObject);
+        }
+
+        // populate sidebar
+        foreach (Transform child in timelineObj.transform) {
+            GameObject curSlide = Instantiate(child.gameObject, sceneSidebarContent.transform);
+        }
     }
 
     public void SwitchToEnactmentPhase() {
@@ -143,5 +158,17 @@ public class Switch : MonoBehaviour {
         List<Tracker> allSpawnedObjs = FindObjectsOfType<Tracker>().ToList();
         foreach (Tracker t in allSpawnedObjs)
             Destroy(t.gameObject);
+    }
+
+    public void OpenSceneSidebar() {
+        sceneSidebarOpenButton.SetActive(false);
+        sceneSidebarScrollView.SetActive(true);
+        sceneSidebarCloseButton.SetActive(true);
+    }
+
+    public void CloseSceneSidebar() {
+        sceneSidebarOpenButton.SetActive(true);
+        sceneSidebarScrollView.SetActive(false);
+        sceneSidebarCloseButton.SetActive(false);
     }
 }
