@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 498}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 0
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1280
     height: 756
-  m_MinSize: {x: 950, y: 498}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 448}
   m_MaxSize: {x: 22006, y: 10024}
   vertical: 0
-  controlID: 4276
+  controlID: 12
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 448}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 4205
+  controlID: 109
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -461,9 +461,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 20440000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2ab9ffff7cbeffff703b00009e3b00002e3c0000ce3c00005c3d0000b63d0000743e0000
+      m_ExpandedIDs: defbffff521200001c140000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -525,7 +525,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Graphics/backgrounds
+    - Assets/Prefabs
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -537,7 +537,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 722e0000
     m_LastClickedID: 11890
-    m_ExpandedIDs: ffffffff000000002a3100002c310000c6380000483900006a390000a6390000363a0000a63a0000b23a0000ba3a0000da3a0000f4430000f6430000f8430000fa430000fc430000fe4300000044000002440000
+    m_ExpandedIDs: 00000000d4090000180b0000360b00007e0b0000200c00003a0e0000760e0000420f0000560f0000c60f000062100000a6380000a8380000aa380000ac380000ae380000b0380000b2380000b4380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -562,10 +562,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0.49987793}
+    scrollPos: {x: 0, y: 162.49939}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000002a3100002c310000c6380000483900006a390000a6390000363a0000a63a0000b23a0000ba3a0000da3a0000f4430000f6430000f8430000fa430000fc430000fe4300000044000002440000
+    m_ExpandedIDs: ffffffff00000000d4090000180b0000360b00007e0b0000200c00003a0e0000760e0000420f0000560f0000c60f000062100000a6380000a8380000aa380000ac380000ae380000b0380000b2380000b4380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
