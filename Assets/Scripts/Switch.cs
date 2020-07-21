@@ -88,7 +88,7 @@ public class Switch : MonoBehaviour {
 
         planningObj.SetActive(false);
         enactmentObj.SetActive(true);
-        prePlanPanel.SetActive(true);
+        prePlanPanel.SetActive(gameController.GetComponent<ModeController>().GetCurGameMode() == GameModes.PREPLANNED);
         startScreenObj.SetActive(false);
 
         // delete existing slides in sidebar
@@ -128,11 +128,11 @@ public class Switch : MonoBehaviour {
     void BeginContinuousEnactment() {
         DestroySpawnedModels();
 
+        OpenEnactmentScene(timelineObj.transform.GetChild(0));
+
         foreach (GameObject go in allTrackableModels) {
             Instantiate(go, Vector3.zero, Quaternion.Euler(-90, 0, 0));
         }
-
-        SetSceneNumText(0);
 
         planningObj.SetActive(false);
         enactmentObj.SetActive(true);
