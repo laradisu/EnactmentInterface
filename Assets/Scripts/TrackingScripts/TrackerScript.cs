@@ -176,7 +176,7 @@ public class TrackerScript : MonoBehaviour {
             client.Close();
         }
         catch {
-            Debug.Log("Didn't quit client correctly");
+            //Debug.Log("Didn't quit client correctly");
         }
     }
 

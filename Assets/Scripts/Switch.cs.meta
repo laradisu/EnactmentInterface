@@ -3,7 +3,25 @@ guid: fc1da99582ce3be479cc6efc68d222d1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - planningObj: {instanceID: 0}
+  - timelineObj: {instanceID: 0}
+  - instructionObj: {instanceID: 0}
+  - enactmentObj: {instanceID: 0}
+  - startScreenObj: {instanceID: 0}
+  - sceneNumText: {instanceID: 0}
+  - backgroundPlane: {instanceID: 0}
+  - prePlanHelperContent: {instanceID: 0}
+  - prePlanPanel: {instanceID: 0}
+  - sceneSidebarContent: {instanceID: 0}
+  - sceneSidebarScrollView: {instanceID: 0}
+  - sceneSidebarOpenButton: {instanceID: 0}
+  - sceneSidebarCloseButton: {instanceID: 0}
+  - defaultPlayerIcon: {instanceID: 0}
+  - defaultObjectIcon: {instanceID: 0}
+  - defaultSceneIcon: {instanceID: 0}
+  - sidebarSlidePrefab: {fileID: 3592833664376680464, guid: 0691bcf6e03dd4de185c2ab1df5333c3,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

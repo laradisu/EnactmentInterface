@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public class SlideController : MonoBehaviour
@@ -11,11 +12,27 @@ public class SlideController : MonoBehaviour
     public GameObject scrollbar;
     Sprite defaultCharacterIcon;
     Sprite defaultObjectIcon;
+    Sprite defaultSceneIcon;
 
-    private void Start()
+    public bool isSidebarSlide = false;
+    GameObject isCopyOf;
+
+    bool initialized = false;
+    bool isCopying = false;
+
+    private void Awake()
     {
+        if (!initialized)
+            Initialize();
+    }
+
+    public void Initialize() {
+        if (initialized)
+            return;
+
         defaultCharacterIcon = GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().defaultPlayerIcon;
         defaultObjectIcon = GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().defaultObjectIcon;
+        defaultSceneIcon = GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().defaultSceneIcon;
 
         // find all character and object icons within the slide and assign them to the appropriate lists
         AttributeClass[] allDescendedAttributeObjs = gameObject.GetComponentsInChildren<AttributeClass>();
@@ -35,19 +52,20 @@ public class SlideController : MonoBehaviour
         objectIcons[2] = gameObject.transform.Find("ObjectDisplay3").gameObject;*/
 
         sceneIcon = gameObject.transform.Find("SceneDisplay").gameObject;
+        initialized = true;
     }
 
-    public void SlideEditButtonPressed(GameObject CurrentSlide)
+    public void SlideEditButtonPressed(GameObject currentSlide)
     {
         GameObject gc = GameObject.FindWithTag("GameController");
         PopupController pc = gc.GetComponent<PopupController>();
-        pc.OpenPopup(CurrentSlide);
+        pc.OpenPopup(currentSlide);
     }
 
     public void AddCharacter(AttributeClass ac)
     {
-       foreach (GameObject ci in characterIcons)
-       {
+        foreach (GameObject ci in characterIcons)
+        {
             AttributeClass ciac = ci.GetComponent<AttributeClass>();
             if(ci.GetComponent<AttributeClass>().model == null)
             {
@@ -56,7 +74,14 @@ public class SlideController : MonoBehaviour
                 ci.GetComponent<Image>().sprite = ciac.icon; 
                 break;
             }
-       }
+        }
+
+        if (!isCopying) {
+            if (isSidebarSlide && isCopyOf != null)
+                isCopyOf.GetComponent<SlideController>().AddCharacter(ac);
+            if (isSidebarSlide)
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
+        }
     }
 
     public void RemoveCharacter(AttributeClass ac) {
@@ -69,6 +94,13 @@ public class SlideController : MonoBehaviour
                 ci.GetComponent<Image>().sprite = defaultCharacterIcon;
                 break;
             }
+        }
+
+        if (!isCopying) {
+            if (isSidebarSlide && isCopyOf != null)
+                isCopyOf.GetComponent<SlideController>().RemoveCharacter(ac);
+            if (isSidebarSlide)
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
         }
     }
 
@@ -85,6 +117,13 @@ public class SlideController : MonoBehaviour
                 break;
             }
         }
+
+        if (!isCopying) {
+            if (isSidebarSlide && isCopyOf != null)
+                isCopyOf.GetComponent<SlideController>().AddObject(ac);
+            if (isSidebarSlide)
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
+        }
     }
 
     public void RemoveObject(AttributeClass ac) {
@@ -100,6 +139,14 @@ public class SlideController : MonoBehaviour
             }
                 
         }
+
+        if (!isCopying) {
+            if (isSidebarSlide && isCopyOf != null)
+                isCopyOf.GetComponent<SlideController>().RemoveObject(ac);
+            if (isSidebarSlide)
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
+
+        }
     }
 
     public void AddScene(AttributeClass ac)
@@ -109,5 +156,69 @@ public class SlideController : MonoBehaviour
         ciac.icon = ac.icon;
         ciac.model = ac.model;
         ciac.background = ac.background;
+
+        if (!isCopying) {
+            if (isSidebarSlide)
+                isCopyOf.GetComponent<SlideController>().AddScene(ac);
+            if (isSidebarSlide)
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
+        }
+
+    }
+
+    public void CopyOtherSlide(GameObject otherSlide) {
+        isCopying = true;
+
+        SlideController sc = otherSlide.GetComponent<SlideController>();
+        ClearSlideData();
+        foreach (GameObject icon in sc.objectIcons) {
+            AddObject(icon.GetComponent<AttributeClass>());
+        }
+
+        foreach (GameObject icon in sc.characterIcons) {
+            AddCharacter(icon.GetComponent<AttributeClass>());
+        }
+        AddScene(sc.sceneIcon.GetComponent<AttributeClass>());
+        isCopyOf = otherSlide;
+        isCopying = false;
+    }
+
+    public void ClearSlideData() {
+        RemoveAllCharacters();
+        RemoveAllObjects();
+        RemoveBackground();
+    }
+
+    public void RemoveAllCharacters() {
+        foreach (GameObject ci in characterIcons) {
+            AttributeClass ciac = ci.GetComponent<AttributeClass>();
+            ciac.icon = null;
+            ciac.model = null;
+            ciac.background = null;
+            ci.GetComponent<Image>().sprite = defaultCharacterIcon;
+            break;
+        }
+    }
+
+    public void RemoveAllObjects() {
+        foreach (GameObject oi in objectIcons) {
+            AttributeClass oiac = oi.GetComponent<AttributeClass>();
+            oiac.icon = null;
+            oiac.model = null;
+            oiac.background = null;
+            oi.GetComponent<Image>().sprite = defaultObjectIcon;
+        }
+    }
+
+    public void RemoveBackground() {
+        /*
+        AttributeClass ciac = sceneIcon.GetComponent<AttributeClass>();
+        sceneIcon.GetComponent<Image>().sprite = defaultSceneIcon;
+        ciac.icon = defaultSceneIcon;
+        ciac.background = defaultSceneIcon;*/
+    }
+
+    public void SlideGotoButtonPressed(GameObject currentSlide) {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().OpenEnactmentScene(currentSlide.GetComponent<SlideController>().isCopyOf.transform);
     }
 }
