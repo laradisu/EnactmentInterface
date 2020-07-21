@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PopupController : MonoBehaviour
 {
@@ -9,13 +9,20 @@ public class PopupController : MonoBehaviour
     GameObject objectSelectionObj;
     GameObject sceneSelectionObj;
 
+    GameObject characterButtons;
+    GameObject objectButtons;
+    GameObject sceneButtons;
+
     GameObject currentSlide;
 
     private void Start() // loads each of the panel selection objects
     {
         objectSelectionObj = popup.transform.Find("ObjectSelection").gameObject;
+        objectButtons = objectSelectionObj.transform.Find("ObjectButtons").gameObject;
         characterSelectionObj = popup.transform.Find("CharacterSelection").gameObject;
+        characterButtons = characterSelectionObj.transform.Find("CharacterButtons").gameObject;
         sceneSelectionObj = popup.transform.Find("SceneSelection").gameObject;
+        sceneButtons = sceneSelectionObj.transform.Find("SceneButtons").gameObject;
     }
 
     public void OpenPopup(GameObject CurrentSlide) // opens the inital popup to character selection
@@ -23,6 +30,7 @@ public class PopupController : MonoBehaviour
         popup.SetActive(true);
         currentSlide = CurrentSlide;
         characterSelectionObj.SetActive(true);
+        RefreshGreenCircles();
     }
 
     public void SwitchToObjectPanel() // switches screen to object panel and deactivates all other panels
@@ -104,5 +112,37 @@ public class PopupController : MonoBehaviour
             RemoveObject(button_);
             greenCircle.SetActive(false);
         }
+    }
+
+    public bool IsAttributeAlreadyUsedInSlide(AttributeClass compareAc) {
+        List<AttributeClass> allAttributes = currentSlide.GetComponentsInChildren<AttributeClass>().ToList();
+        foreach (AttributeClass ac in allAttributes) {
+            if (compareAc == ac)
+                return true;
+        }
+        return false;
+    }
+
+    void RefreshGreenCircles() {
+        List<AttributeClass> allac = GetAllButtonAttributes();
+
+        foreach (AttributeClass ac in allac) {
+            GameObject greenCircle = ac.gameObject.transform.GetChild(0).gameObject;
+            if (IsAttributeAlreadyUsedInSlide(ac)) {
+                greenCircle.SetActive(true);
+            }
+            else {
+                greenCircle.SetActive(false);
+            }
+        }
+    }
+
+    List<AttributeClass> GetAllButtonAttributes() {
+        List<AttributeClass> allac = new List<AttributeClass>();
+        allac.AddRange(characterButtons.GetComponentsInChildren<AttributeClass>());
+        allac.AddRange(objectButtons.GetComponentsInChildren<AttributeClass>());
+        //allac.AddRange(sceneButtons.GetComponentsInChildren<AttributeClass>());
+
+        return allac;
     }
 }

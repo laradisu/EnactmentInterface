@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -187,43 +186,30 @@ public class Switch : MonoBehaviour {
     }
 
     public void RefreshScene() {
-        Debug.Log("Start refresh");
         GameObject slide = currentSlide;
-        Debug.Log("Spot1");
 
-        // reset the preplan icons
+        // clear the preplan icons
         foreach (Transform child in prePlanHelperContent.transform) {
             child.gameObject.GetComponent<Image>().sprite = defaultPlayerIcon;
         }
-        Debug.Log("Spot11");
 
-
-        // spawn characters and objects, set background, populate PrePlanHelper area
-        Debug.Log(slide);
-        Debug.Log(slide.name);
+        // set background, reset PrePlanHelper area
         List<AttributeClass> allAttributes = slide.GetComponentsInChildren<AttributeClass>().ToList();
-        Debug.Log("Spot12");
         foreach (AttributeClass ac in allAttributes) {
             if (ac.model != null) {
-
+                // nothing yet
             }
             if (ac.background != null) {
                 backgroundPlane.GetComponent<Image>().sprite = ac.background;
             }
             if (ac.icon != null && ac.model != null) {
-                Debug.Log("Spot2");
                 foreach (Transform child in prePlanHelperContent.transform) {
-                    Debug.Log("Spot3");
                     if (child.gameObject.GetComponent<Image>().sprite == defaultPlayerIcon) {
-                        Debug.Log("Spot4");
                         child.gameObject.GetComponent<Image>().sprite = ac.icon;
-                        Debug.Log("Spot5");
                         break;
                     }
-                    Debug.Log("Spot6");
                 }
             }
         }
-        Debug.Log("End refresh");
     }
 }
