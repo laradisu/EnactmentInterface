@@ -71,7 +71,7 @@ public class Switch : MonoBehaviour {
         List<AttributeClass> allAttributes = slide.GetComponentsInChildren<AttributeClass>().ToList();
         foreach (AttributeClass ac in allAttributes) {
             if (ac.model != null)
-                Instantiate(ac.model, gameController.GetComponent<ModeController>().IsUsingYOLO() ? Vector3.zero : GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+                SpawnModel(ac.model);
             if (ac.background != null)
                 backgroundPlane.GetComponent<Image>().sprite = ac.background;
             if (ac.icon != null && ac.model != null) {
@@ -167,10 +167,20 @@ public class Switch : MonoBehaviour {
         sceneNumText.GetComponent<TextMeshProUGUI>().text = "Scene #" + num;
     }
 
+    List<GameObject> GetAllSpawnedModels() {
+        List<Tracker> allSpawnedTrackers = FindObjectsOfType<Tracker>().ToList();
+        List<GameObject> toReturn = new List<GameObject>();
+        foreach (Tracker t in allSpawnedTrackers) {
+            toReturn.Add(t.gameObject);
+        }
+
+        return toReturn;
+    }
+
     void DestroySpawnedModels() {
-        List<Tracker> allSpawnedObjs = FindObjectsOfType<Tracker>().ToList();
-        foreach (Tracker t in allSpawnedObjs)
-            Destroy(t.gameObject);
+        List<GameObject> allSpawnedObjs = GetAllSpawnedModels();
+        foreach (GameObject go in allSpawnedObjs)
+            Destroy(go);
     }
 
     public void OpenSceneSidebar() {
@@ -195,9 +205,21 @@ public class Switch : MonoBehaviour {
 
         // set background, reset PrePlanHelper area
         List<AttributeClass> allAttributes = slide.GetComponentsInChildren<AttributeClass>().ToList();
+        List<GameObject> allSpawnedObjs = GetAllSpawnedModels();
         foreach (AttributeClass ac in allAttributes) {
             if (ac.model != null) {
-                // nothing yet
+                // spawn new object if it's not present
+                if (ac.attributeType == AttributeType.Object) {
+                    bool objAlreadySpawned = false;
+                    foreach (GameObject spawnedObj in allSpawnedObjs) {
+                        if (spawnedObj.name.Contains(ac.model.name)) {
+                            objAlreadySpawned = true;
+                            break;
+                        }
+                    }
+                    if (!objAlreadySpawned)
+                        SpawnModel(ac.model);
+                }
             }
             if (ac.background != null) {
                 backgroundPlane.GetComponent<Image>().sprite = ac.background;
@@ -211,5 +233,9 @@ public class Switch : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void SpawnModel(GameObject model) {
+        Instantiate(model, gameController.GetComponent<ModeController>().IsUsingYOLO() ? Vector3.zero : GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
     }
 }
