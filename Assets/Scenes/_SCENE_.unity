@@ -3791,7 +3791,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437306766}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000090333}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1750225120}
@@ -3800,8 +3800,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -143.1, y: -150}
-  m_SizeDelta: {x: 165.9, y: 113.4}
+  m_AnchoredPosition: {x: -131.6, y: -144.8}
+  m_SizeDelta: {x: 188.8, y: 123.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &437306768
 MonoBehaviour:
@@ -9179,7 +9179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Pre-Planned Mode
+  m_text: Enter Virtual Puppet Detection Mode
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d26060b0ae8d19f4ba5c6e77d0531bf8, type: 2}
   m_sharedMaterial: {fileID: 21345432343786526, guid: d26060b0ae8d19f4ba5c6e77d0531bf8,
@@ -9249,12 +9249,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1248032229}
-    characterCount: 22
+    characterCount: 35
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -11966,7 +11966,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525722802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1248032228}
@@ -11975,8 +11975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128, y: -150}
-  m_SizeDelta: {x: 165.9, y: 113.4}
+  m_AnchoredPosition: {x: 140.8, y: -144.8}
+  m_SizeDelta: {x: 191.5, y: 123.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1525722804
 MonoBehaviour:
@@ -13668,7 +13668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Continuous Mode
+  m_text: Enter Physical Puppet Detection Mode
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d26060b0ae8d19f4ba5c6e77d0531bf8, type: 2}
   m_sharedMaterial: {fileID: 21345432343786526, guid: d26060b0ae8d19f4ba5c6e77d0531bf8,
@@ -13738,10 +13738,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1750225121}
-    characterCount: 21
+    characterCount: 36
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
     lineCount: 3
     pageCount: 1
