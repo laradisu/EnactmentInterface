@@ -24,6 +24,7 @@ public class Switch : MonoBehaviour {
     public Sprite defaultPlayerIcon;
     public Sprite defaultObjectIcon;
     public Sprite defaultSceneIcon;
+    public Material defaultBackgroundMaterial;
     public List<GameObject> allTrackableModels;
 
     GameObject gameController;
@@ -72,8 +73,11 @@ public class Switch : MonoBehaviour {
         foreach (AttributeClass ac in allAttributes) {
             if (ac.model != null)
                 SpawnModel(ac.model);
-            if (ac.background != null)
-                backgroundPlane.GetComponent<Image>().sprite = ac.background;
+            if (ac.background != null) {
+                //backgroundPlane.GetComponent<Image>().sprite = ac.background;
+                SetBackground(ac.background);
+            }
+                
             if (ac.icon != null && ac.model != null) {
                 foreach (Transform child in prePlanHelperContent.transform) {
                     if (child.gameObject.GetComponent<Image>().sprite == defaultPlayerIcon) {
@@ -222,7 +226,7 @@ public class Switch : MonoBehaviour {
                 }
             }
             if (ac.background != null) {
-                backgroundPlane.GetComponent<Image>().sprite = ac.background;
+                SetBackground(ac.background);
             }
             if (ac.icon != null && ac.model != null) {
                 foreach (Transform child in prePlanHelperContent.transform) {
@@ -237,5 +241,11 @@ public class Switch : MonoBehaviour {
 
     void SpawnModel(GameObject model) {
         Instantiate(model, gameController.GetComponent<ModeController>().IsUsingYOLO() ? Vector3.zero : GetRandomPositionNearZero(), Quaternion.Euler(-90, 0, 0));
+    }
+
+    void SetBackground(Sprite img) {
+        Material backgroundMat = new Material(defaultBackgroundMaterial);
+        backgroundMat.SetTexture("_MainTex", img.texture);
+        backgroundPlane.GetComponent<MeshRenderer>().material = backgroundMat;
     }
 }

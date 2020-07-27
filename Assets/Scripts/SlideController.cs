@@ -179,8 +179,6 @@ public class SlideController : MonoBehaviour
         foreach (GameObject icon in sc.characterIcons) {
             AddCharacter(icon.GetComponent<AttributeClass>());
         }
-        Debug.Log(sc);
-        Debug.Log(sc.sceneIcon);
         AddScene(sc.sceneIcon.GetComponent<AttributeClass>());
         isCopyOf = otherSlide;
         isCopying = false;
