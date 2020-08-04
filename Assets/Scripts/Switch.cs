@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using RockVR.Video;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public enum GamePhase {
+    START, PLANNING, ENACTMENT
+}
+
 public class Switch : MonoBehaviour {
+    public GamePhase currentGamePhase = GamePhase.START;
     public GameObject planningObj;
     public GameObject timelineObj;
     public GameObject instructionObj;
@@ -27,6 +33,8 @@ public class Switch : MonoBehaviour {
     public Material defaultBackgroundMaterial;
     public List<GameObject> allTrackableModels;
 
+    public GameObject biggerSlide;
+
     GameObject gameController;
     GameObject currentSlide;
 
@@ -41,10 +49,13 @@ public class Switch : MonoBehaviour {
     {
         DestroySpawnedModels();
 
+        currentGamePhase = GamePhase.PLANNING;
         enactmentObj.SetActive(false);
         instructionObj.SetActive(true);
         planningObj.SetActive(true);
         startScreenObj.SetActive(false);
+
+        timelineObj.transform.GetChild(0).GetComponent<SlideController>().SlideViewButtonPressed(timelineObj.transform.GetChild(0).gameObject);
     }
 
     public void PlayPressed() // spawns first slide models then closes the selection screens
@@ -57,10 +68,14 @@ public class Switch : MonoBehaviour {
     }
 
     public void OpenEnactmentScene(Transform slide) {
-        if (slide.GetComponent<SlideController>().isSidebarSlide)
-            Debug.LogWarning("Shouldn't use a sidebarSlide because it may be destroyed; not the original data");
+        currentGamePhase = GamePhase.ENACTMENT;
 
+        if (slide.GetComponent<SlideController>().isProxySlide)
+            Debug.LogWarning("Shouldn't use a sidebarSlide because it may be destroyed; not the original data");
+        if (VideoCaptureCtrl.instance.status == VideoCaptureCtrlBase.StatusType.STARTED)
+            gameController.GetComponent<VideoPlayerController>().PauseRecordButtonPressed();
         currentSlide = slide.gameObject;
+        sceneIndex = slide.GetComponent<SlideController>().indexInTimeline;
         DestroySpawnedModels();
 
         // reset the preplan icons
@@ -152,6 +167,7 @@ public class Switch : MonoBehaviour {
         else if (backwards && sceneIndex > 0)
             sceneIndex--;
         else {
+            ExitEnactmentPhaseCleanup();
             SwitchToPlanningPhase();
             return;
         }
@@ -200,6 +216,11 @@ public class Switch : MonoBehaviour {
     }
 
     public void RefreshScene() {
+        if (currentGamePhase != GamePhase.ENACTMENT) {
+            Debug.Log("Would refresh, but GamePhase isn't Enactment");
+            return;
+        }
+
         GameObject slide = currentSlide;
 
         // clear the preplan icons
@@ -247,5 +268,10 @@ public class Switch : MonoBehaviour {
         Material backgroundMat = new Material(defaultBackgroundMaterial);
         backgroundMat.SetTexture("_MainTex", img.texture);
         backgroundPlane.GetComponent<MeshRenderer>().material = backgroundMat;
+    }
+
+    void ExitEnactmentPhaseCleanup() {
+        if (VideoCaptureCtrl.instance.status == VideoCaptureCtrlBase.StatusType.PAUSED || VideoCaptureCtrl.instance.status == VideoCaptureCtrlBase.StatusType.STARTED)
+            gameController.GetComponent<VideoPlayerController>().StopRecordButtonPressed();
     }
 }

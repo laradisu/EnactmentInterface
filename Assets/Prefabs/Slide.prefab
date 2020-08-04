@@ -1408,8 +1408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 198, y: -60.6}
-  m_SizeDelta: {x: 99.399994, y: 64.7}
+  m_AnchoredPosition: {x: 206.5, y: -62.299988}
+  m_SizeDelta: {x: 125, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2269672450248842794
 CanvasRenderer:
@@ -1478,8 +1478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2edb841cc90de74b8825601e06891bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  captionTextObj: {fileID: 0}
+  titleTextObj: {fileID: 5193902346323248169}
   scrollbar: {fileID: 5218348383640241537}
-  isSidebarSlide: 0
+  isProxySlide: 0
+  indexInTimeline: 0
 --- !u!114 &3362657828828767213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000012397766, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0.0000104904175, y: 0.00004005432}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5952633305248755280
@@ -2021,7 +2024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000014305115, y: 0.0000705719}
+  m_AnchoredPosition: {x: 0.000016212463, y: 0.0000705719}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5017006421409242725
@@ -2300,8 +2303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24000001, y: 0.5}
   m_AnchorMax: {x: 0.24000001, y: 0.5}
-  m_AnchoredPosition: {x: -4.375, y: 1.165}
-  m_SizeDelta: {x: 19.94, y: 47.13}
+  m_AnchoredPosition: {x: -4.375, y: 1.51}
+  m_SizeDelta: {x: 19.65, y: 46.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5096225042565564599
 CanvasRenderer:
@@ -2505,8 +2508,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7890611946785693084}
   m_HandleRect: {fileID: 7242604083739140286}
   m_Direction: 2
-  m_Value: 0.99999917
-  m_Size: 0.39275
+  m_Value: 0.9999995
+  m_Size: 0.38708335
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2574,7 +2577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Edit Slide
+  m_text: View
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2643,10 +2646,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3169648680390030077}
-    characterCount: 10
+    characterCount: 4
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -2751,7 +2754,7 @@ GameObject:
   - component: {fileID: 8319675822254845523}
   - component: {fileID: 4151342812458157571}
   m_Layer: 5
-  m_Name: EditButton
+  m_Name: ViewButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2853,7 +2856,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4903727050310130911}
-        m_MethodName: SlideEditButtonPressed
+        m_MethodName: SlideViewButtonPressed
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2269672450248842791}

@@ -1717,8 +1717,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2edb841cc90de74b8825601e06891bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  captionTextObj: {fileID: 0}
+  titleTextObj: {fileID: 7401457723428334110}
   scrollbar: {fileID: 7406305974412274614}
-  isSidebarSlide: 1
+  isProxySlide: 1
+  indexInTimeline: 0
 --- !u!114 &2743579124977114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3128,7 +3131,18 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7687286099686437608}
+        m_MethodName: OnTitleChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.UI;
@@ -8,13 +9,19 @@ public class SlideController : MonoBehaviour
 {
     List<GameObject> characterIcons = new List<GameObject>();
     List<GameObject> objectIcons = new List<GameObject>();
+    string caption = "";
+    public GameObject captionTextObj;
+    public GameObject titleTextObj;
     GameObject sceneIcon;
     public GameObject scrollbar;
     Sprite defaultCharacterIcon;
     Sprite defaultObjectIcon;
     Sprite defaultSceneIcon;
 
-    public bool isSidebarSlide = false;
+    public bool isProxySlide = false;
+    // A proxy slide is a slide that needs to constantly transfer its changes to 
+    // another slide that it was originally copied from (sidebar slide and "bigger slide")
+    public int indexInTimeline = 0;
     GameObject isCopyOf;
 
     bool initialized = false;
@@ -22,8 +29,7 @@ public class SlideController : MonoBehaviour
 
     private void Awake()
     {
-        if (!initialized)
-            Initialize();
+        Initialize();
     }
 
     public void Initialize() {
@@ -62,6 +68,12 @@ public class SlideController : MonoBehaviour
         pc.OpenPopup(currentSlide);
     }
 
+    public void SlideViewButtonPressed(GameObject currentSlide) {
+        GameObject gc = GameObject.FindWithTag("GameController");
+        GameObject bs = gc.GetComponent<Switch>().biggerSlide;
+        bs.GetComponent<SlideController>().CopyOtherSlide(currentSlide);
+    }
+
     public void AddCharacter(AttributeClass ac)
     {
         foreach (GameObject ci in characterIcons)
@@ -77,9 +89,9 @@ public class SlideController : MonoBehaviour
         }
 
         if (!isCopying) {
-            if (isSidebarSlide && isCopyOf != null)
+            if (isProxySlide && isCopyOf != null)
                 isCopyOf.GetComponent<SlideController>().AddCharacter(ac);
-            if (isSidebarSlide)
+            if (isProxySlide)
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
         }
     }
@@ -97,9 +109,9 @@ public class SlideController : MonoBehaviour
         }
 
         if (!isCopying) {
-            if (isSidebarSlide && isCopyOf != null)
+            if (isProxySlide && isCopyOf != null)
                 isCopyOf.GetComponent<SlideController>().RemoveCharacter(ac);
-            if (isSidebarSlide)
+            if (isProxySlide)
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
         }
     }
@@ -119,9 +131,10 @@ public class SlideController : MonoBehaviour
         }
 
         if (!isCopying) {
-            if (isSidebarSlide && isCopyOf != null)
+            Debug.Log(isCopyOf + " " + gameObject.name + " " + isProxySlide);
+            if (isProxySlide && isCopyOf != null)
                 isCopyOf.GetComponent<SlideController>().AddObject(ac);
-            if (isSidebarSlide)
+            if (isProxySlide)
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
         }
     }
@@ -141,9 +154,9 @@ public class SlideController : MonoBehaviour
         }
 
         if (!isCopying) {
-            if (isSidebarSlide && isCopyOf != null)
+            if (isProxySlide && isCopyOf != null)
                 isCopyOf.GetComponent<SlideController>().RemoveObject(ac);
-            if (isSidebarSlide)
+            if (isProxySlide)
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
 
         }
@@ -158,9 +171,9 @@ public class SlideController : MonoBehaviour
         ciac.background = ac.background;
 
         if (!isCopying) {
-            if (isSidebarSlide)
+            if (isProxySlide)
                 isCopyOf.GetComponent<SlideController>().AddScene(ac);
-            if (isSidebarSlide)
+            if (isProxySlide)
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().RefreshScene();
         }
 
@@ -175,11 +188,15 @@ public class SlideController : MonoBehaviour
         foreach (GameObject icon in sc.objectIcons) {
             AddObject(icon.GetComponent<AttributeClass>());
         }
-
         foreach (GameObject icon in sc.characterIcons) {
             AddCharacter(icon.GetComponent<AttributeClass>());
         }
         AddScene(sc.sceneIcon.GetComponent<AttributeClass>());
+
+        SetTitle(sc.titleTextObj.GetComponent<TMP_InputField>().text);
+        if (captionTextObj != null) {
+            SetCaption(sc.caption);
+        }
         isCopyOf = otherSlide;
         isCopying = false;
     }
@@ -197,7 +214,6 @@ public class SlideController : MonoBehaviour
             ciac.model = null;
             ciac.background = null;
             ci.GetComponent<Image>().sprite = defaultCharacterIcon;
-            break;
         }
     }
 
@@ -221,5 +237,28 @@ public class SlideController : MonoBehaviour
 
     public void SlideGotoButtonPressed(GameObject currentSlide) {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<Switch>().OpenEnactmentScene(currentSlide.GetComponent<SlideController>().isCopyOf.transform);
+    }
+
+    public void OnCaptionChanged() {
+        caption = captionTextObj.GetComponent<TMP_InputField>().text;
+        if (isProxySlide && !isCopying) {
+            isCopyOf.GetComponent<SlideController>().SetCaption(caption);
+        }
+    }
+
+    public void SetCaption(string setTo) {
+        caption = setTo;
+        if (captionTextObj != null)
+            captionTextObj.GetComponent<TMP_InputField>().text = setTo;
+    }
+
+    public void OnTitleChanged() {
+        if (isProxySlide && !isCopying) {
+            isCopyOf.GetComponent<SlideController>().SetTitle(titleTextObj.GetComponent<TMP_InputField>().text);
+        }
+    }
+
+    public void SetTitle(string setTo) {
+        titleTextObj.GetComponent<TMP_InputField>().text = setTo;
     }
 }
