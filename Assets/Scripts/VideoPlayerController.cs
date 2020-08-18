@@ -18,12 +18,12 @@ public class VideoPlayerController : MonoBehaviour
             TogglePauseRecording();
             pauseRecordingButton.SetActive(true);
             startRecordingButton.SetActive(false);
-            stopRecordingButton.SetActive(true);
+            //stopRecordingButton.SetActive(true);
         }
         else {
             StartRecording();
             startRecordingButton.SetActive(false);
-            stopRecordingButton.SetActive(true);
+            //stopRecordingButton.SetActive(true);
             pauseRecordingButton.SetActive(true);
         }
     }
@@ -31,7 +31,7 @@ public class VideoPlayerController : MonoBehaviour
     public void StopRecordButtonPressed() {
         StopRecording();
         startRecordingButton.SetActive(true);
-        stopRecordingButton.SetActive(false);
+        //stopRecordingButton.SetActive(false);
     }
 
     public void PauseRecordButtonPressed() {

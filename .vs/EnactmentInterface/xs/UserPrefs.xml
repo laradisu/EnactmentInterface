@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{52724EEA-BDF3-1276-1F4D-E665ABDB10C6}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Switch.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/VideoPlayerController.cs">
     <Files>
       <File FileName="Assets/Scripts/Switch.cs" Line="291" Column="79" />
       <File FileName="Assets/Scripts/TrackingScripts/TrackerRotScript.cs" />
@@ -7,18 +7,18 @@
       <File FileName="Assets/Scripts/TrackingScripts/TrackerScript.cs" />
       <File FileName="Assets/Scripts/ModeController.cs" />
       <File FileName="Assets/Scripts/InstructionController.cs" />
-      <File FileName="Assets/Scripts/SlideController.cs" Line="75" Column="73" />
+      <File FileName="Assets/Scripts/SlideController.cs" />
       <File FileName="Assets/Scripts/SlideAdder.cs" />
       <File FileName="Assets/Scripts/PopupController.cs" />
       <File FileName="Assets/Scripts/AttributeClass.cs" />
       <File FileName="Assets/Scripts/VideoPlayerController.cs" Line="74" Column="17" />
-      <File FileName="Assets/RockVR/Video/Scripts/VideoCapture.cs" Line="393" Column="10" />
+      <File FileName="Assets/RockVR/Video/Scripts/VideoCapture.cs" />
       <File FileName="Assets/RockVR/Common/Scripts/Process.cs" />
       <File FileName="Assets/RockVR/Video/Editor/VideoCaptureMenuEditor.cs" />
       <File FileName="Assets/RockVR/Video/Scripts/AudioCapture.cs" />
-      <File FileName="Assets/RockVR/Video/Demo/Scripts/VideoCaptureUI.cs" Line="39" Column="58" />
-      <File FileName="Assets/RockVR/Video/Scripts/Base/VideoCaptureCtrlBase.cs" Line="13" Column="35" />
-      <File FileName="Assets/RockVR/Video/Scripts/VideoCaptureCtrl.cs" Line="14" Column="57" />
+      <File FileName="Assets/RockVR/Video/Demo/Scripts/VideoCaptureUI.cs" />
+      <File FileName="Assets/RockVR/Video/Scripts/Base/VideoCaptureCtrlBase.cs" />
+      <File FileName="Assets/RockVR/Video/Scripts/VideoCaptureCtrl.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -30,7 +30,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="671a6fde-37a0-4e7f-8c9f-b56626502a63" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="4eb93a5f-5e97-46d1-8c74-566d6f2a37cd" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
