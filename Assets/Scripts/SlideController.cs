@@ -12,6 +12,7 @@ public class SlideController : MonoBehaviour
     string caption = "";
     public GameObject captionTextObj;
     public GameObject titleTextObj;
+    public GameObject selectedColorObj;
     GameObject sceneIcon;
     public GameObject scrollbar;
     Sprite defaultCharacterIcon;
@@ -72,6 +73,12 @@ public class SlideController : MonoBehaviour
         GameObject gc = GameObject.FindWithTag("GameController");
         GameObject bs = gc.GetComponent<Switch>().biggerSlide;
         bs.GetComponent<SlideController>().CopyOtherSlide(currentSlide);
+        foreach (Transform slide in transform.parent) {
+            if (slide.gameObject.GetComponent<SlideController>() != null) {
+                slide.gameObject.GetComponent<SlideController>().selectedColorObj.SetActive(false);
+            }
+        }
+        selectedColorObj.SetActive(true);
     }
 
     public void AddCharacter(AttributeClass ac)

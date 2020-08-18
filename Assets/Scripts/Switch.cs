@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using RockVR.Video;
 using TMPro;
@@ -13,6 +14,7 @@ public enum GamePhase {
 public class Switch : MonoBehaviour {
     public GamePhase currentGamePhase = GamePhase.START;
     public GameObject planningObj;
+    public GameObject videoPlayerObj;
     public GameObject timelineObj;
     public GameObject instructionObj;
     public GameObject enactmentObj;
@@ -25,6 +27,7 @@ public class Switch : MonoBehaviour {
     public GameObject sceneSidebarScrollView;
     public GameObject sceneSidebarOpenButton;
     public GameObject sceneSidebarCloseButton;
+    public GameObject enactmentInstructionFlashObj;
     int sceneIndex = 0;
 
     public Sprite defaultPlayerIcon;
@@ -47,6 +50,7 @@ public class Switch : MonoBehaviour {
 
     public void SwitchToPlanningPhase() // opens the inital popup to character selection
     {
+        ExitEnactmentPhaseCleanup();
         DestroySpawnedModels();
 
         currentGamePhase = GamePhase.PLANNING;
@@ -54,6 +58,7 @@ public class Switch : MonoBehaviour {
         instructionObj.SetActive(true);
         planningObj.SetActive(true);
         startScreenObj.SetActive(false);
+        videoPlayerObj.SetActive(false);
 
         timelineObj.transform.GetChild(0).GetComponent<SlideController>().SlideViewButtonPressed(timelineObj.transform.GetChild(0).gameObject);
     }
@@ -69,6 +74,7 @@ public class Switch : MonoBehaviour {
 
     public void OpenEnactmentScene(Transform slide) {
         currentGamePhase = GamePhase.ENACTMENT;
+        FlashEnactmentInstructions();
 
         if (slide.GetComponent<SlideController>().isProxySlide)
             Debug.LogWarning("Shouldn't use a sidebarSlide because it may be destroyed; not the original data");
@@ -167,12 +173,17 @@ public class Switch : MonoBehaviour {
         else if (backwards && sceneIndex > 0)
             sceneIndex--;
         else {
-            ExitEnactmentPhaseCleanup();
             SwitchToPlanningPhase();
             return;
         }
 
         OpenEnactmentSceneByIndex(sceneIndex);
+    }
+
+    public void SwitchToVideoPlayer() {
+        planningObj.SetActive(false);
+        videoPlayerObj.SetActive(true);
+        GetComponent<VideoPlayerController>().PlayRecordedVideo();
     }
 
     public void RestartGame() {
@@ -217,7 +228,7 @@ public class Switch : MonoBehaviour {
 
     public void RefreshScene() {
         if (currentGamePhase != GamePhase.ENACTMENT) {
-            Debug.Log("Would refresh, but GamePhase isn't Enactment");
+            //Debug.Log("Would refresh, but GamePhase isn't Enactment");
             return;
         }
 
@@ -258,6 +269,16 @@ public class Switch : MonoBehaviour {
                 }
             }
         }
+    }
+
+    void FlashEnactmentInstructions() {
+        enactmentInstructionFlashObj.SetActive(true);
+        StartCoroutine(FlashOff());
+    }
+
+    IEnumerator FlashOff() {
+        yield return new WaitForSeconds(2f);
+        enactmentInstructionFlashObj.SetActive(false);
     }
 
     void SpawnModel(GameObject model) {

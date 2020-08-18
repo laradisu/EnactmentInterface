@@ -8,6 +8,10 @@ public class VideoPlayerController : MonoBehaviour
     public GameObject stopRecordingButton;
     public GameObject startRecordingButton;
     public GameObject pauseRecordingButton;
+    public GameObject background;
+    public GameObject loadingText;
+    bool tryPlayVideo = false;
+    bool playingVideo = false;
 
     public void StartRecordButtonPressed() {
         if (VideoCaptureCtrl.instance.status == VideoCaptureCtrlBase.StatusType.PAUSED) {
@@ -51,15 +55,24 @@ public class VideoPlayerController : MonoBehaviour
     }
 
     public void PlayRecordedVideo() {
-
-    }
-
-    public void StopRecordedVideo() {
-
+        background.SetActive(true);
+        loadingText.SetActive(true);
+        tryPlayVideo = true;
     }
 
     private void Update() {
-        /*if (Input.GetKey(KeyCode.Q))
-            Debug.Log(VideoCaptureCtrl.instance.status);*/
+        if (tryPlayVideo) {
+            if (VideoCaptureCtrl.instance.status == VideoCaptureCtrlBase.StatusType.FINISH) {
+                background.SetActive(false);
+                loadingText.SetActive(false);
+                VideoPlayer.instance.SetRootFolder();
+                VideoPlayer.instance.PlayVideo();
+                tryPlayVideo = false;
+                playingVideo = true;
+            }
+            else {
+                
+            }
+        }
     }
 }
